@@ -1,0 +1,57 @@
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <stack>
+using namespace std;
+void read_file (fstream &file, string &s1, string &s2)
+{
+    getline(file,s1);
+    getline(file,s2);
+}
+void check (string &s1, string &s2, int &count1_open, int &count1_close,int &count2_close,int &count2_open)
+{
+    
+
+    for (int i=0;i<s1.length();i++)
+        for (int j=0;j<s2.length();j++)
+        
+            if (s1[i]==s2[j])
+            {
+                if ((s1[i]!=')')&&(s1[i]!='(')){
+              count1_open++;  break;}
+                else
+                {
+                    if (s1[i]=='(')count1_close++;
+                    if (s1[i]==')')count2_close++;
+                    if (count1_close==count2_close) count1_open++;
+                }
+    
+                
+            }
+    
+    
+}
+
+int main(int argc, const char * argv[])
+{
+    fstream file;
+    fstream out;
+    out.open("/Users/igor/Desktop/proga/KR/KR/out.txt");
+    file.open("/Users/igor/Desktop/proga/KR/KR/file.txt");
+    if (!file) cout<<"File is not open"<<endl;
+    else cout<<"File is open"<<endl;
+    string s1,s2;
+    int count1_open = 0;
+    int count1_close = 0;
+    int count2_close=0;
+    int count2_open = 0;
+    read_file(file, s1, s2);
+    check (s1,s2,count1_open, count1_close,count2_close,count2_open);
+    cout<<s1<<endl;
+    cout<<s2<<endl;
+    if (count1_open%2==0) {out<<"TRUE"; cout<<"TRUE"<<endl;}
+    else { out<<"FALSE"; cout<<"FALSE"<<endl;}
+   
+    return 0;
+}
