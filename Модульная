@@ -1,4 +1,4 @@
-
+//извините за странные названия переменных
 #include <iostream>
 #include <fstream>
 #include <string>
